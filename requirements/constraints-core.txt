@@ -10,3 +10,11 @@ nemoguardrails==0.10.0
 openai==1.109.1
 annoy==1.17.3
 numpy==1.26.4
+# datasets 2.x accepts newer PyArrow releases whose Windows wheels now require
+# NumPy 2. Keep the transitive dependency compatible with the lab's NumPy pin.
+pyarrow==16.1.0
+# Newer unconstrained Torch wheels failed to load c10.dll on the lab's Windows
+# runtime. This CPU-capable release supports Python 3.11 and NumPy 1.26.
+torch==2.2.2
+transformers==4.46.3
+sentence-transformers==3.3.1

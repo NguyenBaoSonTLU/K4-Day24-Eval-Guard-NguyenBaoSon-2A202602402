@@ -6,7 +6,10 @@ __pycache__/
 .venv/
 .venv*/
 venv/
+.uv-cache/
 .pytest_cache/
+.pytest-*/
+pytest-cache-files-*/
 .env.*
 !.env.example
 # artifacts/*.json là bằng chứng bắt buộc của bài nộp.
