@@ -1,27 +1,28 @@
-# Nhóm thực hiện K4 Track 3B
+# Bài cá nhân K4 Track 3B
 
-Tên nhóm: {{Tên nhóm}}
+Tên nhóm: NguyenBaoSon
 
 Repo chung: https://github.com/NguyenBaoSonTLU/K4-Day24-Eval-Guard-NguyenBaoSon-2A202602402
 
-Trưởng nhóm/người nộp: {{Họ tên và MSSV}}
+Trưởng nhóm/người nộp: Nguyễn Bảo Sơn — 2A202602402
 
-Ngày lab/deadline áp dụng: {{Ngày giờ theo thông báo lớp}} — Asia/Ho_Chi_Minh (UTC+07:00)
+Ngày lab/deadline áp dụng: 23:59 ngày 13/10/2026 — Asia/Ho_Chi_Minh (UTC+07:00),
+theo deadline mặc định trong `doc/RULES.md`.
 
-Commit dùng để chấm: {{Commit SHA}}
+Commit dùng để chấm: commit HEAD mới nhất của nhánh `main` tại thời điểm nộp;
+SHA được gửi cùng link repo qua kênh coach.
 
-Mỗi nhóm nộp một repo. Điền đủ thành viên và một mục INDIVIDUAL cho từng người.
-Thêm/xóa rows để khớp nhóm thật; mẫu ba rows không ép nhóm phải có ba người.
+Bài được thực hiện cá nhân; repo chỉ có một thành viên và một mục INDIVIDUAL.
 
 ## Thành viên và phân công
 
 | STT | Họ và tên | MSSV | Vai trò / công việc thật | Bằng chứng |
 |---|---|---|---|---|
-| 1 | {{Họ tên}} | {{MSSV}} | {{Phase/file/hàm}} | {{Commit/PR/report}} |
-| 2 | {{Họ tên}} | {{MSSV}} | {{Phase/file/hàm}} | {{Commit/PR/report}} |
-| 3 | {{Họ tên}} | {{MSSV}} | {{Phase/file/hàm}} | {{Commit/PR/report}} |
+| 1 | Nguyễn Bảo Sơn | 2A202602402 | Chuẩn bị pipeline m1–m5; implement Tasks 1–12 trong Phase A/B/C; tích hợp môi trường, Qdrant và tests | Commit `94e174c`; support tests 60 passed; phase tests 26 passed; `artifacts/answers_50q.json` lưu local |
 
-Người tích hợp/chạy batch/nộp link: {{Họ tên, công việc và bằng chứng}}.
+Người tích hợp/chạy batch/nộp link: Nguyễn Bảo Sơn — 2A202602402; cấu hình
+Python 3.11/Qdrant/models, chạy setup 50 answers, kiểm tra schema và push source
+lên `origin/main`.
 
 ## Môi trường và chuẩn bị trước lớp
 
@@ -52,18 +53,30 @@ end-to-end; không dùng `pip check` hay unit tests để tuyên bố Phase C đ
 
 ## INDIVIDUAL
 
-Sao chép mẫu cho mỗi thành viên; tiêu đề họ tên không dấu-MSSV.
+Thông tin đóng góp cá nhân duy nhất của repo:
 
-### {{HoVaTen}}-{{MSSV}}
+### NguyenBaoSon-2A202602402
 
-- Phần được giao và phần thực tế đã làm: {{Nhiệm vụ, file/hàm, mục đích}}.
-- Bằng chứng: {{Commit/PR và artifacts/reports liên quan}}.
-- Cách kiểm tra: {{Unit mock hoặc live experiment, lệnh và kết quả}}.
-- Điều đã học: {{Khái niệm và cách thể hiện trong bài}}.
-- Giới hạn/cách xử lý: {{Vấn đề và kiểm chứng}}.
-- Nguồn/AI hỗ trợ nếu có: {{Công cụ, phạm vi, cách tự kiểm chứng}}.
+- Phần được giao và phần thực tế đã làm: toàn bộ bài cá nhân. Viết adapter
+  `src/m1_chunking.py` đến `src/m5_enrichment.py`; implement Tasks 1–12 trong
+  `src/phase_a_ragas.py`, `src/phase_b_judge.py`, `src/phase_c_guard.py`; chuẩn
+  bị Python 3.11, dependencies, spaCy, Qdrant, embedding/reranker và 50 answers.
+- Bằng chứng: commit `94e174c`; collection Qdrant `lab24_production` có 26 points
+  trạng thái `green`; `artifacts/answers_50q.json` local có 50 ids đúng phân phối
+  20 factual/20 multi_hop/10 adversarial và đã pass `validate_answers`.
+- Cách kiểm tra: `python -m pytest tests/ -m support -q` đạt 60 tests;
+  `python -m pytest tests/test_phase_a.py tests/test_phase_b.py
+  tests/test_phase_c.py -q` đạt 26 tests; `pip check` không có dependency lỗi.
+- Điều đã học: giữ provenance giữa question/answer/contexts/reference; phân biệt
+  pairwise winner với binary label; quy đổi A/B sau swap; tính Cohen's kappa;
+  kiểm tra cả attack và clean controls; đo latency tuần tự từ raw samples.
+- Giới hạn/cách xử lý: Phase A/B/C live chưa chạy nên chưa có
+  `ragas_50q.json`, `judge_results.json`, `guard_results.json` hoặc số liệu báo
+  cáo cuối. Không dùng kết quả mock/unit test để tuyên bố ba phase đã hoàn tất.
+- Nguồn/AI hỗ trợ nếu có: OpenAI Codex hỗ trợ viết code, cấu hình môi trường và
+  chạy kiểm tra. Nguyễn Bảo Sơn đối chiếu hợp đồng starter, fixtures, validator,
+  kết quả test và setup thực tế trước khi commit.
 
 ## Cập nhật sau khi nộp
 
-{{Ghi phiên bản nộp; nếu sửa sau deadline, ghi commit/thời điểm/lý do và thông báo
-coach cho phép áp dụng bản cập nhật. Nếu không có cập nhật, ghi rõ không có.}}
+Chưa có cập nhật sau khi nộp.
